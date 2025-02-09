@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Our Love Code</title>
+    <audio id="bgm" autoplay loop hidden>
+        <source src="D:/迅雷云盘/等风来 .Take Easy.-银河快递.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+    <style>
+        body {
+            background: #000;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* 心跳动画 */
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            left: 50px;
+            top: 0;
+            width: 50px;
+            height: 80px;
+            background: #ff3f3f;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.3);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+        }
+
+        /* 文字样式 */
+        .message {
+            color: #fff;
+            text-align: center;
+            margin-top: 30px;
+            font-family: Arial;
+            text-shadow: 0 0 10px #ff3f3f;
+        }
+        .music-tip {
+            color: #666;
+            position: fixed;
+            bottom: 20px;
+            font-size: 12px;
+            font-family: Arial;
+        }
+        /* 倒计时样式 */
+        #countdown {
+            color: #fff;
+            font-size: 2em;
+            margin-top: 20px;
+            font-family: monospace;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="heart"></div>
+
+    <div class="message">
+        <h1>To My Forever Love</h1>
+        <p>while True:<br>
+            &nbsp;&nbsp;my_heart.beat() = "You"<br>
+            &nbsp;&nbsp;my_love.countdown = ∞</p>
+    </div>
+
+    <div id="countdown"></div>
+
+    <script>
+        // 设置纪念日（修改这里）
+        const anniversary = new Date('2025-2-10').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = anniversary - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML =
+                `❤️ ${days}d ${hours}h ${minutes}m ${seconds}s ❤️`;
+        }
+
+        // 每秒更新倒计时
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // 立即执行一次
+        // 新增音乐播放控制
+        const audio = document.getElementById('bgm');
+
+        // 处理浏览器自动播放限制
+        document.body.addEventListener('click', () => {
+            audio.play().catch(() => {
+                alert('请点击此处允许音频播放');
+            });
+        });
+
+        // 可选：添加键盘控制
+        document.addEventListener('keypress', (e) => {
+            if (e.code === 'Space') {
+                audio.paused ? audio.play() : audio.pause();
+            }
+        });
+    </script>
+    <div class="music-tip">BGM: 银河快递 - 等风来 | 点击任意处播放/暂停 | 空格键控制</div>
+</body>
+
+</html>
